@@ -72,7 +72,7 @@
             if(email==null){
                 return "adminlogin";
             }
-            return service.students(className,map);
+            return service.studentsList(className,map);
         }
         @GetMapping("/addStudent")
         public String addview(@RequestParam(name="id",required = false) Integer classId,HttpSession session ,Model map){
@@ -86,7 +86,7 @@
             return "addstudent";
         }
         @PostMapping("/addNewStudent")
-        public String studentAdd(@RequestParam Optional<Integer> id , StudentRequest request, Model map){
+        public String studentAdd(@RequestParam Optional<Integer> id ,StudentRequest request, Model map){
             return service.stduentAdd(id,request,map);
         }
         @GetMapping("/teacher")
@@ -171,17 +171,14 @@
         public String deleteStudent(@PathVariable int id,Model map){
             return service.deleteStudent(id,map);
         }
-        @GetMapping("/updateteacherprofile/{id}")
-        public String updateTeacherView(@PathVariable int id ,Model map){
-            Teacher upTeacher = teacherRepository.findById(id);
-            if(upTeacher!=null){
-                map.addAttribute("teacher",upTeacher);
-            }
-            return "updateteacherprofile";
+
+        @PostMapping("saveteacherprofile")
+        public String upadteteacher(UpdateTeacher updateTeacher,Model map){
+            return service.updateTeacherProfile(updateTeacher,map);
         }
-        @PostMapping("saveteacherprofile/{id}")
-        public String upadteteacher(@PathVariable int id ,UpdateTeacher updateTeacher,Model map){
-            return service.updateTeacherProfile(id,updateTeacher,map);
+        @PostMapping("savestudentprofile")
+        public String updateStudent(UpdateStudent updateStudent,Model map){
+            return service.updateStudentProfile(updateStudent,map);
         }
 
     }

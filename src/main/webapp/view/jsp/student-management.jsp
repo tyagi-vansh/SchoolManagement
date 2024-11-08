@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
   <title>Student Records</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -181,7 +183,7 @@
     .delete-button {
       padding: 10px 20px;
       margin: 20px;
-      background-color: #4CAF50;
+      background-color: indianred;
       color: white;
       border: none;
       border-radius: 5px;
@@ -204,12 +206,145 @@
       bottom: 0;
     }
 
+        .upmodal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.7);
+          justify-content: center;
+          align-items: center;
+        }
+
+        .upmodal-content {
+          background: url('https://31.media.tumblr.com/41c01e3f366d61793e5a3df70e46b462/tumblr_n4vc8sDHsd1st5lhmo1_1280.jpg');
+          background-color: rgba(0, 0, 0, 0.7); /
+          padding: 2rem;
+          border-radius: 10px;
+          overflow: auto;
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
+          width: 50%;
+          max-width: 600px;
+          color: white;
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+
+        label {
+          margin: 0.5rem 0 0.2rem;
+          font-size: 1rem;
+        }
+
+        input[type="text"], input[type="email"], input[type="tel"] {
+          padding: .75rem;
+          border: 1px solid rgba(255, 255, 255, 0.5);
+          background-color: rgba(255, 255, 255, 0.1);
+          color: white;
+          font-size: 1.1rem;
+          border-radius: 5px;
+        }
+
+        button {
+          padding: .75rem;
+          background-color: rgba(255, 255, 255, 0.3);
+          border: none;
+          color: white;
+          background-color: #4CAF50;
+          font-size: 1.1rem;
+          cursor: pointer;
+          border-radius: 5px;
+          transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+          background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .close {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          color: white;
+          font-size: 2em;
+          cursor: pointer;
+          z-index: 10;
+        }
+
+        .underlay-black {
+          background: rgba(0, 0, 0, 0.7);
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: -1;
+        }
+        .form-container {
+              min-height: 10rem;
+              margin: 2rem auto 0;
+              max-width: 70%;
+              padding: 1rem;
+            }
+
+            .form {
+              background-color: rgba(0, 0, 0, 0.7);
+              padding: 1.5rem;
+              border-radius: 10px;
+              color: white;
+              display: flex;
+              flex-direction: column;
+              gap: 1rem;
+            }
+
+            label {
+              margin: 0.5rem 0 0.2rem;
+            }
+
+            input[type="text"], input[type="email"], input[type="tel"] {
+              padding: .75rem;
+              border: 1px solid rgba(255, 255, 255, 0.5);
+              background-color: rgba(255, 255, 255, 0.1);
+              color: white;
+              font-size: 1.1rem;
+              border-radius: 5px;
+            }
+
+            .underlay-photo {
+              animation: hue-rotate 6s infinite;
+              background-size: cover;
+              -webkit-filter: grayscale(30%);
+              z-index: -1;
+            }
+
+            .underlay-black {
+              background: rgba(0,0,0,0.7);
+              z-index: -1;
+            }
+
+            .form-text{
+              font-weight: 800;
+              font-size: x-large;
+            }
+
+            @keyframes hue-rotate {
+              from {
+                -webkit-filter: grayscale(30%) hue-rotate(0deg);
+              }
+              to {
+                -webkit-filter: grayscale(30%) hue-rotate(360deg);
+              }
+            }
+
+
   </style>
 </head>
 
 <body>
 
-  <!-- Fixed Header -->
   <div class="header">
     <h1>XYZ School of Excellence</h1>
     <form class="add-student-form" action="/addStudent" method="get">
@@ -217,10 +352,8 @@
     </form>
   </div>
 
-  <!-- Fixed Menu Button -->
   <button class="nav-button" onclick="toggleNavbar()"> MENU</button>
 
-  <!-- Navbar (hidden initially) -->
   <div class="navbar" id="navbar">
     <button class="navbar-button" onclick="location.href='/dashboard'">Back to Dashboard</button>
     <button class="navbar-button" onclick="location.href='/teacher'">
@@ -234,7 +367,6 @@
     </button>
   </div>
 
-  <!-- Content Section with Scrollable Table -->
   <div class="content">
     <div class="table-container">
       <p class="table-text">Student Records</p>
@@ -259,6 +391,7 @@
               <td>${student.fathers_name}</td>
               <td>${student.contact_number}</td>
               <td>
+                  <button onclick="openUpdateModal('${student.id}', '${student.name}', '${student.standard}', '${student.fathers_name}','${student.contact_number}')" class="update-button">Update</button>
                   <button onclick="deleteStudent('${student.id}')" class="delete-button">Delete</button>
               </td>
             </tr>
@@ -267,11 +400,41 @@
       </table>
     </div>
   </div>
+<div id="upmodal" class="upmodal">
+    <span class="close" onclick="closeupmodal()">&times;</span>
+    <div class="upmodal-content">
+     <div class="form-container">
+        <p class="form-text">Update Student Profile</p>
+            <c:if test="${not empty errorMessage}">
+                 <h3 class="error-message">${errorMessage}</h3>
+            </c:if>
+            <c:if test="${not empty errorMessage}">
+                 <h3 class="error-message">${success}</h3>
+            </c:if>
+            <form action="/savestudentprofile"  method="post" id="updateStudentForm" class="form">
+                    <input type="hidden" id="studentid" name="id" value="">
 
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="standard">Standard</label>
+                    <input type="standard" id="standard" name="standard" required>
+
+                    <label for="fathers_name">fathers_name</label>
+                    <input type="tel" id="fathers_name" name="fathers_name" required>
+
+                    <label for="contact_number">contact_number</label>
+                    <input type="tel" id="contact_number" name="contact_number" required>
+
+                    <button type="submit">Update Profile</button>
+            </form>
+        </form>
+      </div>
+    </div>
+  </div>
   <div class="underlay-black"></div>
 
   <script>
-    // Toggle Navbar visibility
     function toggleNavbar() {
       const navbar = document.getElementById('navbar');
       navbar.style.display = navbar.style.display === 'flex' ? 'none' : 'flex';
@@ -292,6 +455,25 @@
             });
         }
     }
+    function openUpdateModal(id, name, standard, fathers_name,contact_number) {
+          document.getElementById("studentid").value = id;
+          document.getElementById("name").value = name;
+          document.getElementById("standard").value = standard;
+          document.getElementById("fathers_name").value = fathers_name;
+          document.getElementById("contact_number").value = contact_number;
+
+          upmodal.style.display = "flex";
+        }
+
+        function closeupmodal() {
+          upmodal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+          if (event.target === upmodal) {
+            closeupmodal();
+          }
+        }
   </script>
 
 </body>

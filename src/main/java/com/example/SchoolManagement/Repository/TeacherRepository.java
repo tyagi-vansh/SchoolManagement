@@ -10,4 +10,5 @@ public interface TeacherRepository extends JpaRepository<Teacher,Integer> {
     Teacher findById(int id);
     List<Teacher> findByDepartmentId(int id);
     Teacher deleteById(int id);
+    Teacher findByEmail(String email);
 }

@@ -6,6 +6,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Teacher Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -96,7 +98,7 @@
       overflow: auto;
       height: calc(100% - 160px);
       margin: 8rem auto 0;
-      max-width: 85%;  /* Increase the width of the table */
+      max-width: 85%;
       padding: 1rem;
       background-color: rgba(0, 0, 0, 0.7);
       border-radius: 10px;
@@ -119,7 +121,7 @@
     }
 
     th, td {
-      padding: 1rem; /* Increase padding for better readability */
+      padding: 1rem;
       text-align: left;
       border: 1px solid rgba(255, 255, 255, 0.5);
     }
@@ -159,66 +161,155 @@
       bottom: 0;
       z-index: -1;
     }
-    .modal {
-                display: none;
-                position: fixed;
-                z-index: 1;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.9);
-                justify-content: center;
-                align-items: center;
-            }
-            .upmodal {
-                display: none;
-                position: fixed;
-                z-index: 1;
-                left: 0;
-                top: 0;
-                width: 100vw;
-                height: 100vh;
-                background-color: rgba(0, 0, 0, 0.9);
-                justify-content: center;
-                align-items: center;
-            }
 
-            .upmodal-content {
-                max-width: 90%;
-                max-height: 90%;
-                background: #222;
-                padding: 20px;
-                border-radius: 10px;
-                overflow: auto;
-                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
-            }
+    .upmodal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+    }
 
+    .upmodal-content {
+      background: url('https://31.media.tumblr.com/41c01e3f366d61793e5a3df70e46b462/tumblr_n4vc8sDHsd1st5lhmo1_1280.jpg');
+      background-color: rgba(0, 0, 0, 0.7); /
+      padding: 2rem;
+      border-radius: 10px;
+      overflow: auto;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
+      width: 50%;
+      max-width: 600px;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
 
-            .modal-content {
-                max-width: 100%;
-                max-height: 100%;
-            }
+    label {
+      margin: 0.5rem 0 0.2rem;
+      font-size: 1rem;
+    }
 
-            .close {
-                position: absolute;
-                top: 20px;
-                right: 20px;
-                color: #fff;
-                font-size: 2em;
-                cursor: pointer;
-                z-index: 10;
-            }
+    input[type="text"], input[type="email"], input[type="tel"] {
+      padding: .75rem;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 1.1rem;
+      border-radius: 5px;
+    }
 
-            .modal-content img {
-                width: 100%;
-                height: auto;
-            }
-            .upmodal-content iframe {
-                width: 100%;
-                height: 100%;
-                border: none;
-            }
+    button {
+      padding: .75rem;
+      background-color: rgba(255, 255, 255, 0.3);
+      border: none;
+      color: white;
+      background-color: green;
+      font-size: 1.1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    button:hover {
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: white;
+      font-size: 2em;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .underlay-black {
+      background: rgba(0, 0, 0, 0.7);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+    }
+    .form-container {
+          min-height: 10rem;
+          margin: 2rem auto 0;
+          max-width: 70%;
+          padding: 1rem;
+        }
+
+        .form {
+          background-color: rgba(0, 0, 0, 0.7);
+          padding: 1.5rem;
+          border-radius: 10px;
+          color: white;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        label {
+          margin: 0.5rem 0 0.2rem;
+        }
+
+        input[type="text"], input[type="email"], input[type="tel"] {
+          padding: .75rem;
+          border: 1px solid rgba(255, 255, 255, 0.5);
+          background-color: rgba(255, 255, 255, 0.1);
+          color: white;
+          font-size: 1.1rem;
+          border-radius: 5px;
+        }
+
+        button {
+          padding: .75rem;
+          background-color: rgba(255, 255, 255, 0.3);
+          border: none;
+          color: white;
+          background-color: green;
+          font-size: 1.1rem;
+          cursor: pointer;
+          border-radius: 5px;
+        }
+
+        button:hover {
+          background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .underlay-photo {
+          animation: hue-rotate 6s infinite;
+          background-size: cover;
+          -webkit-filter: grayscale(30%);
+          z-index: -1;
+        }
+
+        .underlay-black {
+          background: rgba(0,0,0,0.7);
+          z-index: -1;
+        }
+
+        .form-text{
+          font-weight: 800;
+          font-size: x-large;
+        }
+
+        @keyframes hue-rotate {
+          from {
+            -webkit-filter: grayscale(30%) hue-rotate(0deg);
+          }
+          to {
+            -webkit-filter: grayscale(30%) hue-rotate(360deg);
+          }
+        }
+
   </style>
 </head>
 <body>
@@ -263,7 +354,7 @@
             <td>${teach.email}</td>
             <td>${teach.mobile}</td>
             <td>
-              <button onclick="updateTeacher('${teach.id}')" class="update-button">Update</button>
+              <button onclick="openUpdateModal('${teach.id}', '${teach.name}', '${teach.email}', '${teach.mobile}')" class="update-button">Update</button>
               <button onclick="deleteTeacher('${teach.id}')" class="delete-button">Delete</button>
             </td>
           </tr>
@@ -284,56 +375,79 @@
   <div class="underlay-black"></div>
 
   <div id="upmodal" class="upmodal">
-      <span class="close" onclick="closeupmodal()">&times;</span>
-      <div class="modal-content">
-          <iframe style="width:500px; height:700px " ></iframe>
+    <span class="close" onclick="closeupmodal()">&times;</span>
+    <div class="upmodal-content">
+     <div class="form-container">
+        <p class="form-text">Update Teacher Profile</p>
+            <c:if test="${not empty errorMessage}">
+                 <h3 class="error-message">${errorMessage}</h3>
+            </c:if>
+            <c:if test="${not empty errorMessage}">
+                 <h3 class="error-message">${success}</h3>
+            </c:if>
+            <form action="/saveteacherprofile" method="post" id="updateTeacherForm" class="form">
+                    <input type="hidden" id="teacherId" name="id" value="">
+
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="mobile">Mobile</label>
+                    <input type="tel" id="mobile" name="mobile" required>
+
+                    <button type="submit">Update Profile</button>
+            </form>
+
+        </form>
       </div>
+    </div>
   </div>
 
-  <script>
 
+  <script>
     var upmodal = document.getElementById("upmodal");
-    var id;
-    var iframe = document.querySelector("#upmodal iframe");
+
     function toggleNavbar() {
       const navbar = document.getElementById('navbar');
       navbar.style.display = navbar.style.display === 'flex' ? 'none' : 'flex';
     }
 
-    function deleteTeacher(id){
-        if(confirm("Press ok to delete teacher")){
-            $.ajax({
-                url : "/deleteTeacher/"+ id,
-                type : "post",
-                success : function(data){
-                        alert("Teacher deleted successfully!");
-                        location.reload();
-                },
-                error : function(data){
-                    alert(data.message);
-                }
-            });
-        }
+    function deleteTeacher(id) {
+      if (confirm("Press OK to delete teacher")) {
+        $.ajax({
+          url: "/deleteTeacher/" + id,
+          type: "post",
+          success: function(data) {
+            alert("Teacher deleted successfully!");
+            location.reload();
+          },
+          error: function(data) {
+            alert(data.message);
+          }
+        });
+      }
     }
-     function updateTeacher(teacherId) {
-         id = teacherId;
-         iframe.src = "/updateteacherprofile/"+id;
-         updatemodal();
-     }
-    function updatemodal() {
-        upmodal.style.display = "flex";
+
+    function openUpdateModal(id, name, email, mobile) {
+      document.getElementById("teacherId").value = id;
+      document.getElementById("name").value = name;
+      document.getElementById("email").value = email;
+      document.getElementById("mobile").value = mobile;
+
+      upmodal.style.display = "flex";
     }
 
     function closeupmodal() {
-        upmodal.style.display = "none";
+      upmodal.style.display = "none";
     }
 
     window.onclick = function(event) {
-        if (event.target === upmodal) {
-            closeupmodal();
-        }
+      if (event.target === upmodal) {
+        closeupmodal();
+      }
     }
-
   </script>
 
 </body>

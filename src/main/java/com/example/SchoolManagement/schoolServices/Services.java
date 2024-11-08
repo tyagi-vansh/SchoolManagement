@@ -55,7 +55,6 @@ public class Services {
                 map.addAttribute("departmentcount",d);
                 return"/dashboard";
             }
-
         }
         map.addAttribute("errorMessage","Inavlid username or password");
         return "/adminlogin";
@@ -72,12 +71,12 @@ public class Services {
         return "/departmentdisplay";
     }
 
-    public String students(int className,Model map){
-        List<Student> studentList = studentRepo.findByStandard(className);
+    public String studentsList(int standard, Model map){
+        List<Student> studentList = studentRepo.findByStandard(standard);
         map.addAttribute("students",studentList);
         return "/student-management";
     }
-    public String stduentAdd(Optional<Integer> id, StudentRequest request, Model map){
+    public String stduentAdd(Optional<Integer> id,StudentRequest request, Model map){
         Student newStudent = new Student();
         newStudent.setName(request.getName());
         newStudent.setStandard(request.getStandard());
@@ -201,17 +200,31 @@ public class Services {
         map.addAttribute("Students",studentRepo.findAll());
         return "/student-management";
     }
-    public String updateTeacherProfile(int id,UpdateTeacher updateTeacher,Model map){
-        Teacher upteacher = teacherRepository.findById(id);
+    public String updateTeacherProfile(UpdateTeacher updateTeacher,Model map){
+        Teacher upteacher = teacherRepository.findById(updateTeacher.getId());
         if(upteacher!=null){
             upteacher.setEmail(updateTeacher.getEmail());
             upteacher.setName(updateTeacher.getName());
             upteacher.setMobile(updateTeacher.getMobile());
             teacherRepository.save(upteacher);
             map.addAttribute("success","teacher updated succesfully");
-            return "/updateteacherprofile/{id}";
+            return "redirect:/teacher";
         }
         map.addAttribute("errorMessage","teacher not found");
-        return "/updateteacherprofile/{id}";
+        return "redirect :/teacher";
+    }
+    public String updateStudentProfile(UpdateStudent updateStudent,Model map){
+        Student upStudent = studentRepo.findById(updateStudent.getId());
+        if(upStudent!=null){
+            upStudent.setName(updateStudent.getName());
+            upStudent.setContact_number(updateStudent.getContact_number());
+            upStudent.setFathers_name(updateStudent.getFathers_name());
+            upStudent.setStandard(updateStudent.getStandard());
+            studentRepo.save(upStudent);
+            map.addAttribute("success","updated Sucessfully");
+            return "redirect:/student-management?className="+updateStudent.getStandard();
+        }
+        map.addAttribute("errorMessage","Student Data Not Found");
+        return "redirect:/classdisplay?className="+updateStudent.getStandard();
     }
 }
